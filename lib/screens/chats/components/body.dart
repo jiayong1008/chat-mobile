@@ -1,5 +1,6 @@
 import 'package:chat_mobile/components/filled_outline_button.dart';
 import 'package:chat_mobile/constants.dart';
+import 'package:chat_mobile/models/Chat.dart';
 import 'package:flutter/material.dart';
 
 class Body extends StatelessWidget {
@@ -11,18 +12,17 @@ class Body extends StatelessWidget {
       children: [
         Container(
           padding: const EdgeInsets.fromLTRB(
-            kDefaultPadding, 0, kDefaultPadding, kDefaultPadding
-          ),
+              kDefaultPadding, 0, kDefaultPadding, kDefaultPadding),
           color: kPrimaryColor,
           child: Row(
             children: [
               FillOutlineButton(
-                press: () {}, 
+                press: () {},
                 text: "Recent Message",
               ),
               SizedBox(width: kDefaultPadding),
               FillOutlineButton(
-                press: () {}, 
+                press: () {},
                 text: "Active",
                 isFilled: false,
               ),
@@ -31,10 +31,82 @@ class Body extends StatelessWidget {
         ),
         Expanded(
           child: ListView.builder(
-            itemBuilder: (context, index) => Text("Test"),
+            itemCount: chatsData.length,
+            itemBuilder: (context, index) => ChatCard(chat: chatsData[index]),
           ),
         ),
       ],
+    );
+  }
+}
+
+class ChatCard extends StatelessWidget {
+  const ChatCard({
+    super.key, required this.chat,
+  });
+
+  final Chat chat;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: kDefaultPadding, vertical: kDefaultPadding * 0.75),
+      child: Row(
+        children: [
+          Stack(
+            children: [
+              CircleAvatar(
+                radius: 24,
+                backgroundImage: AssetImage(chat.image),
+              ),
+              if (chat.isActive)
+                Positioned(
+                  right: 0,
+                  bottom: 0,
+                  child: Container(
+                    height: 16,
+                    width: 16,
+                    decoration: BoxDecoration(
+                      color: kPrimaryColor,
+                      shape: BoxShape.circle,
+                      border: Border.all(
+                        color: Theme.of(context).scaffoldBackgroundColor,
+                        width: 3,
+                      )
+                    ),
+                  ),
+                ),
+            ]
+          ),
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: kDefaultPadding),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    chat.name,
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+                  ),
+                  SizedBox(height: 8,),
+                  Opacity(
+                    opacity: 0.64,
+                    child: Text(
+                      chat.lastMessage,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+                ],
+              ),
+            )
+          ),
+          Opacity(
+            opacity: 0.64,
+            child: Text(chat.time)
+          ),
+        ],
+      ),
     );
   }
 }
