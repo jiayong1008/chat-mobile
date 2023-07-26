@@ -1,3 +1,4 @@
+import 'package:chat_mobile/screens/chats/components/body.dart';
 import 'package:flutter/material.dart';
 
 class ChatsScreen extends StatelessWidget {
@@ -6,16 +7,21 @@ class ChatsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        title: Text("Chats"), 
-        actions: [
-          IconButton(
-            onPressed: () {}, 
-            icon: Icon(Icons.search)
-          ),
-        ],
-      ),
+      appBar: buildAppBar(),
+      body: Body(),
+    );
+  }
+
+  AppBar buildAppBar() {
+    return AppBar(
+      automaticallyImplyLeading: false,
+      title: Text("Chats"), 
+      actions: [
+        IconButton(
+          onPressed: () {}, 
+          icon: Icon(Icons.search),
+        ),
+      ],
     );
   }
 }
