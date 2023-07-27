@@ -16,7 +16,7 @@ class _ChatsScreenState extends State<ChatsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: buildAppBar(),
-      body: Body(),
+      body: const Body(),
       floatingActionButton: FloatingActionButton(
         onPressed: () {},
         backgroundColor: kPrimaryColor,
@@ -38,7 +38,7 @@ class _ChatsScreenState extends State<ChatsScreen> {
           _selectedIndex = value;
         });
       },
-      items: [
+      items: const [
         BottomNavigationBarItem(icon: Icon(Icons.messenger), label: "Chats"),
         BottomNavigationBarItem(icon: Icon(Icons.people), label: "People"),
         BottomNavigationBarItem(icon: Icon(Icons.call), label: "Calls"),
