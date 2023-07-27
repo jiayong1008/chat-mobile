@@ -2,8 +2,15 @@ import 'package:chat_mobile/constants.dart';
 import 'package:chat_mobile/screens/chats/components/body.dart';
 import 'package:flutter/material.dart';
 
-class ChatsScreen extends StatelessWidget {
+class ChatsScreen extends StatefulWidget {
   const ChatsScreen({Key? key}) : super(key: key);
+
+  @override
+  State<ChatsScreen> createState() => _ChatsScreenState();
+}
+
+class _ChatsScreenState extends State<ChatsScreen> {
+  int _selectedIndex = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -18,20 +25,30 @@ class ChatsScreen extends StatelessWidget {
           color: Colors.white,
         ),
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: [
-          BottomNavigationBarItem(icon: Icon(Icons.messenger), label: "Chats"),
-          BottomNavigationBarItem(icon: Icon(Icons.people), label: "People"),
-          BottomNavigationBarItem(icon: Icon(Icons.call), label: "Calls"),
-          BottomNavigationBarItem(
+      bottomNavigationBar: buildBottomNavigationBar(),
+    );
+  }
+
+  BottomNavigationBar buildBottomNavigationBar() {
+    return BottomNavigationBar(
+      type: BottomNavigationBarType.fixed,
+      currentIndex: _selectedIndex,
+      onTap: (value) {
+        setState(() {
+          _selectedIndex = value;
+        });
+      },
+      items: [
+        BottomNavigationBarItem(icon: Icon(Icons.messenger), label: "Chats"),
+        BottomNavigationBarItem(icon: Icon(Icons.people), label: "People"),
+        BottomNavigationBarItem(icon: Icon(Icons.call), label: "Calls"),
+        BottomNavigationBarItem(
             icon: CircleAvatar(
               radius: 14,
               backgroundImage: AssetImage("assets/images/user_2.png"),
-            ), 
-            label: "Profile"
-          ),
-        ],
-      ),
+            ),
+            label: "Profile"),
+      ],
     );
   }
 
@@ -39,10 +56,10 @@ class ChatsScreen extends StatelessWidget {
     return AppBar(
       backgroundColor: kPrimaryColor,
       automaticallyImplyLeading: false,
-      title: const Text("Chats"), 
+      title: const Text("Chats"),
       actions: [
         IconButton(
-          onPressed: () {}, 
+          onPressed: () {},
           icon: const Icon(Icons.search),
         ),
       ],
