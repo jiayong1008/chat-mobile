@@ -1,3 +1,4 @@
+import 'package:chat_mobile/screens/messages/components/chat_input_field.dart';
 import 'package:flutter/material.dart';
 
 class Body extends StatelessWidget {
@@ -5,6 +6,11 @@ class Body extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return const Column(
+      children: [
+        Spacer(),
+        ChatInputField(),
+      ],
+    );
   }
 }
