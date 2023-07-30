@@ -1,4 +1,7 @@
+import 'package:chat_mobile/constants.dart';
+import 'package:chat_mobile/models/ChatMessage.dart';
 import 'package:chat_mobile/screens/messages/components/chat_input_field.dart';
+import 'package:chat_mobile/screens/messages/components/message.dart';
 import 'package:flutter/material.dart';
 
 class Body extends StatelessWidget {
@@ -6,9 +9,18 @@ class Body extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Column(
+    return Column(
       children: [
-        Spacer(),
+        Expanded(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: kDefaultPadding),
+            child: ListView.builder(
+              itemCount: demoChatMessages.length,
+              itemBuilder: (BuildContext context, int index) => 
+                Message(message: demoChatMessages[index],),
+            ),
+          ),
+        ),
         ChatInputField(),
       ],
     );

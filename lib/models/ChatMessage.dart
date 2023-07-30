@@ -16,7 +16,7 @@ class ChatMessage {
   });
 }
 
-List demeChatMessages = [
+List demoChatMessages = [
   ChatMessage(
     text: "Hi Sajol,",
     messageType: ChatMessageType.text,

@@ -15,6 +15,7 @@ class MessagesScreen extends StatelessWidget {
 
   AppBar buildAppBar() {
     return AppBar(
+      backgroundColor: kPrimaryColor,
       automaticallyImplyLeading: false,
       title: const Row(
         children: [
